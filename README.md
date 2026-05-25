@@ -21,7 +21,8 @@ To test this, we intergrated four data types:
 4. Interate binding and expression data to identify direct Gene X regulatory tagets
    
 ## Backgroud
-Epigenomic factors regulate gene expression by controlling chromatin accessibility and transcription factor binding. CUT&RUN (Cleavage Under Tagets and Release Using Nuclease) is a high-resolution method for mapping protein-DNA interactions genomic-wide (
+Epigenomic factors regulate gene expression by controlling chromatin accessibility and transcription factor binding. CUT&RUN (Cleavage Under Tagets and Release Using Nuclease) is a high-resolution method for mapping protein-DNA interactions genomic-wide (Skene, P.J. and Henikoff, S., 2017). RNA-seq combined with DESeq2 enables quantification of transcriptional differences between conditions (Love et al., 2014).
+
 ## Dataset
 Download dataset from 
 ```bash
