@@ -38,7 +38,7 @@ wget -R "index.html*" -r -nd -nH -np https://cgr.liv.ac.uk/454/acdarby/LIFE750/L
 - `gene_x_binding_sites.bad`: CUT&RUN peaks for Gene X binding
 
 ## Bioinformatics Workflow
-# Step 1 - Environment Setup
+### Step 1 - Environment Setup
 ```bash
 conda create -n 750
 conda activate 750
@@ -46,7 +46,7 @@ conda install -c bioconda -c conda-forge \
   bwa samtools bcftools snippy bedtools subread r-base fastqc multiqc fastp -y
 ```
 
-# Step 2 - Quality Control
+### Step 2 - Quality Control
 ```bash
 # FastQC on all raw reads
 mkdir -p ~/750/results/raw_qc_results
@@ -69,7 +69,7 @@ fastp -i normal_GeneX_R1.fastq -I normal_GeneX_R2.fastq \
   --html ~/750/results/raw_qc_results/normal_report.html
 ```
 
-# Step 3 - Alignment and Variant Calling
+### Step 3 - Alignment and Variant Calling
 ```bash
 # Index reference
 bwa index GeneX_reference.fa
@@ -102,7 +102,7 @@ bcftools view ~/750/results/variants/gene_x_variants.bcf \
   > ~/750/results/variants/gene_x_variants.vcf
 ```
 
-# Step 4 - CUT&RUN Binding Analysis
+### Step 4 - CUT&RUN Binding Analysis
 ```bash
 mkdir -p ~/750/results/binding
 
@@ -125,7 +125,7 @@ grep -o "ID=GENE_[0-9]*" ~/750/results/binding/genes_with_proximal_binding.txt \
 wc -l ~/750/results/binding/bound_gene_ids.txt
 ```
 
-# Step 5 - Differential Expression Analysis (R-studio/DESeq2)
+### Step 5 - Differential Expression Analysis (R-studio/DESeq2)
 ```r
 library(DESeq2)
 library(tidyverse)
@@ -180,7 +180,7 @@ plotMA(res, ylim=c(-5,5))
 dev.off()
 ```
 
-# Step 6 - Integration: Binding vs Differential Expression
+### Step 6 - Integration: Binding vs Differential Expression
 ```r
 # Load bound gene IDs
 bound_genes <- read.table(
@@ -230,12 +230,12 @@ Wissink, E.M., Vihervaara, A., Tippens, N.D. and Lis, J.T. (2019) ‘Nascent RNA
 ## Software reference
 Bioinformatics tools and packages for coding
 
-# R-studio packages
+### R-studio packages
 Love, M.I., Huber, W. and Anders, S. (2014) ‘Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2’, Genome Biology, 15(12), p. 550. Available at: https://doi.org/10.1186/s13059-014-0550-8.
 
 Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L., François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T., Miller, E., Bache, S., Müller, K., Ooms, J., Robinson, D., Seidel, D., Spinu, V., Takahashi, K., Vaughan, D., Wilke, C., Woo, K. and Yutani, H. (2019) ‘Welcome to the tidyverse’, Journal of Open Source Software, 4(43), p. 1686. Available at: https://doi.org/10.21105/joss.01686.
 
-# Bioinformatics tools
+### Bioinformatics tools
 Andrews, S. (2019). Babraham Bioinformatics - FastQC A Quality Control tool for High Throughput Sequence Data. [online] Babraham.ac.uk. Available at: http://www.bioinformatics.babraham.ac.uk/projects/fastqc/.
 
 Chen, S., Zhou, Y., Chen, Y. and Gu, J. (2018) ‘Fastp: an ultra-fast all-in-one fastq preprocessor’, Bioinformatics, 34(17), pp. i884–i890. Available at: https://doi.org/10.1093/bioinformatics/bty560.
