@@ -1,0 +1,33 @@
+##fileformat=VCFv4.2
+##FILTER=<ID=PASS,Description="All filters passed">
+##bcftoolsVersion=1.19+htslib-1.19
+##bcftoolsCommand=mpileup -f GeneX_reference.fa /home/faepimnipa/750/results/alignment/normal_GeneX_sorted.bam /home/faepimnipa/750/results/alignment/mutant_GeneX_sorted.bam
+##reference=file://GeneX_reference.fa
+##contig=<ID=GeneX_reference,length=720>
+##ALT=<ID=*,Description="Represents allele(s) other than observed.">
+##INFO=<ID=INDEL,Number=0,Type=Flag,Description="Indicates that the variant is an INDEL.">
+##INFO=<ID=IDV,Number=1,Type=Integer,Description="Maximum number of raw reads supporting an indel">
+##INFO=<ID=IMF,Number=1,Type=Float,Description="Maximum fraction of raw reads supporting an indel">
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Raw read depth">
+##INFO=<ID=VDB,Number=1,Type=Float,Description="Variant Distance Bias for filtering splice-site artefacts in RNA-seq data (bigger is better)",Version="3">
+##INFO=<ID=RPBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Read Position Bias (closer to 0 is better)">
+##INFO=<ID=MQBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Mapping Quality Bias (closer to 0 is better)">
+##INFO=<ID=BQBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Base Quality Bias (closer to 0 is better)">
+##INFO=<ID=MQSBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Mapping Quality vs Strand Bias (closer to 0 is better)">
+##INFO=<ID=SCBZ,Number=1,Type=Float,Description="Mann-Whitney U-z test of Soft-Clip Length Bias (closer to 0 is better)">
+##INFO=<ID=SGB,Number=1,Type=Float,Description="Segregation based metric, http://samtools.github.io/bcftools/rd-SegBias.pdf">
+##INFO=<ID=MQ0F,Number=1,Type=Float,Description="Fraction of MQ0 reads (smaller is better)">
+##FORMAT=<ID=PL,Number=G,Type=Integer,Description="List of Phred-scaled genotype likelihoods">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes for each ALT allele, in the same order as listed">
+##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
+##INFO=<ID=DP4,Number=4,Type=Integer,Description="Number of high-quality ref-forward , ref-reverse, alt-forward and alt-reverse bases">
+##INFO=<ID=MQ,Number=1,Type=Integer,Description="Average mapping quality">
+##bcftools_callVersion=1.19+htslib-1.19
+##bcftools_callCommand=call -mv -Ob -o /home/faepimnipa/750/results/variants/gene_x_variants.bcf; Date=Wed May 20 19:29:58 2026
+##bcftools_viewVersion=1.19+htslib-1.19
+##bcftools_viewCommand=view /home/faepimnipa/750/results/variants/gene_x_variants.bcf; Date=Wed May 20 19:32:06 2026
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	/home/faepimnipa/750/results/alignment/normal_GeneX_sorted.bam	/home/faepimnipa/750/results/alignment/mutant_GeneX_sorted.bam
+GeneX_reference	55	.	T	A	216.008	.	DP=259;VDB=9.99689e-19;SGB=87.1666;RPBZ=0.126015;MQBZ=0;BQBZ=-0.992278;SCBZ=0;MQ0F=0;AC=2;AN=4;DP4=130,0,128,0;MQ=60	GT:PL	0/0:0,255,255	1/1:255,255,0
+GeneX_reference	349	.	G	T	216.007	.	DP=494;VDB=0.447428;SGB=-78.368;RPBZ=0.191831;MQBZ=0;MQSBZ=0;BQBZ=-0.603337;SCBZ=0;MQ0F=0;AC=2;AN=4;DP4=175,67,179,70;MQ=60	GT:PL	0/0:0,255,255	1/1:255,255,0
+GeneX_reference	549	.	A	C	216.017	.	DP=491;VDB=0.667267;SGB=169.651;RPBZ=-0.724948;MQBZ=0;MQSBZ=0;BQBZ=-0.0288396;SCBZ=0;MQ0F=0;AC=2;AN=4;DP4=64,176,54,193;MQ=60	GT:PL	0/0:0,255,255	1/1:255,255,0
