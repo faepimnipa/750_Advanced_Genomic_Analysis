@@ -1,5 +1,5 @@
 ## Bioinformatics Workflow
-# Step 1 - Environment Setup
+### Step 1 - Environment Setup
 ```bash
 conda create -n 750
 conda activate 750
@@ -7,7 +7,7 @@ conda install -c bioconda -c conda-forge \
   bwa samtools bcftools snippy bedtools subread r-base fastqc multiqc fastp -y
 ```
 
-# Step 2 - Quality Control
+### Step 2 - Quality Control
 ```bash
 # FastQC on all raw reads
 mkdir -p ~/750/results/raw_qc_results
@@ -30,7 +30,7 @@ fastp -i normal_GeneX_R1.fastq -I normal_GeneX_R2.fastq \
   --html ~/750/results/raw_qc_results/normal_report.html
 ```
 
-# Step 3 - Alignment and Variant Calling
+### Step 3 - Alignment and Variant Calling
 ```bash
 # Index reference
 bwa index GeneX_reference.fa
@@ -63,7 +63,7 @@ bcftools view ~/750/results/variants/gene_x_variants.bcf \
   > ~/750/results/variants/gene_x_variants.vcf
 ```
 
-# Step 4 - CUT&RUN Binding Analysis
+### Step 4 - CUT&RUN Binding Analysis
 ```bash
 mkdir -p ~/750/results/binding
 
@@ -86,7 +86,7 @@ grep -o "ID=GENE_[0-9]*" ~/750/results/binding/genes_with_proximal_binding.txt \
 wc -l ~/750/results/binding/bound_gene_ids.txt
 ```
 
-# Step 5 - Differential Expression Analysis (R-studio/DESeq2)
+### Step 5 - Differential Expression Analysis (R-studio/DESeq2)
 ```r
 library(DESeq2)
 library(tidyverse)
@@ -141,7 +141,7 @@ plotMA(res, ylim=c(-5,5))
 dev.off()
 ```
 
-# Step 6 - Integration: Binding vs Differential Expression
+### Step 6 - Integration: Binding vs Differential Expression
 ```r
 # Load bound gene IDs
 bound_genes <- read.table(
