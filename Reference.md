@@ -31,6 +31,8 @@ Skene, P.J. and Henikoff, S. (2017) An efficient targeted nuclease strategy for 
 
 Sun, M., Schwalb, B., Pirkl, N., Maier, K.C., Schenk, A., Failmezger, H., Tresch, A. and Cramer, P. (2013) ‘Global analysis of eukaryotic mrna degradation reveals xrn1-dependent buffering of transcript levels’, Molecular Cell, 52(1), pp. 52–62. Available at: https://doi.org/10.1016/j.molcel.2013.09.010.
 
+Sun, M., Schwalb, B., Schulz, D., Pirkl, N., Etzold, S., Larivière, L., Maier, K.C., Seizl, M., Tresch, A. and Cramer, P. (2012) ‘Comparative dynamic transcriptome analysis (Cdta) reveals mutual feedback between mRNA synthesis and degradation’, Genome Research, 22(7), pp. 1350–1359. Available at: https://doi.org/10.1101/gr.130161.111.
+
 Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L., François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T., Miller, E., Bache, S., Müller, K., Ooms, J., Robinson, D., Seidel, D., Spinu, V., Takahashi, K., Vaughan, D., Wilke, C., Woo, K. and Yutani, H. (2019) ‘Welcome to the tidyverse’, Journal of Open Source Software, 4(43), p. 1686. Available at: https://doi.org/10.21105/joss.01686.
 
 Wissink, E.M., Vihervaara, A., Tippens, N.D. and Lis, J.T. (2019) ‘Nascent RNA analyses: tracking transcription and its regulation’, Nature Reviews Genetics, 20(12), pp. 705–723. Available at: https://doi.org/10.1038/s41576-019-0159-6.
