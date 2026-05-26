@@ -1,0 +1,135 @@
+---
+title: '750'
+output:
+  pdf_document: default
+  html_document: default
+date: "2026-05-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r}
+library(DESeq2)
+library(tidyverse)
+```
+```{r}
+citation("tidyverse")
+```
+
+```{r}
+counts_data <- read.csv("gene_counts.tsv",
+                        sep="\t", row.names=1)
+head(counts_data)
+```
+
+```{r}
+# Create sample info
+colData <- data.frame(
+  condition = factor(c(rep("normal",5), rep("mutant",5)))
+)
+rownames(colData) <- colnames(counts_data)
+
+# Check they match - must say TRUE
+all(colnames(counts_data) %in% rownames(colData))
+all(colnames(counts_data) == rownames(colData))
+```
+
+```{r}
+# Build DESeq2 object
+dds <- DESeqDataSetFromMatrix(countData = counts_data,
+                              colData = colData,
+                              design = ~ condition)
+
+# Filter low counts
+keep <- rowSums(counts(dds)) >= 10
+dds <- dds[keep,]
+
+# Set normal as reference
+dds$condition <- relevel(dds$condition, ref = "normal")
+
+# Run DESeq2
+dds <- DESeq(dds)
+res <- results(dds)
+res <- res[order(res$padj),]
+summary(res)
+```
+
+
+```{r}
+# Save all results
+res_df <- as.data.frame(res)
+write.csv(res_df,
+  "DESeq2_results.csv")
+# Save significant DEGs only
+sig <- subset(res_df, padj < 0.05 & abs(log2FoldChange) > 1)
+write.csv(sig,
+  "significant_DEGs.csv")
+```
+
+```{r}
+up_count <- sum(res_df$padj < 0.05 & res_df$log2FoldChange > 1, na.rm = TRUE)
+print(paste("Upregulated genes:", up_count)) 
+
+down_count <- sum(res_df$padj < 0.05 & res_df$log2FoldChange < -1, na.rm = TRUE)
+print(paste("Downregulated genes:", down_count))
+```
+
+```{r}
+upregulated_genes <- rownames(res_df[which(res_df$padj < 0.05 & res_df$log2FoldChange > 1), ])
+
+downregulated_genes <- rownames(res_df[which(res_df$padj < 0.05 & res_df$log2FoldChange < -1), ])
+
+print(upregulated_genes)
+print(downregulated_genes)
+```
+
+```{r}
+# Plots (save these for your report)
+vsd <- vst(dds, blind=FALSE)
+plotPCA(vsd, intgroup="condition")   
+plotMA(res, ylim=c(-5,5))            
+```
+```{r}
+# Load bound genes
+bound_genes <- read.table(
+  "bound_gene_ids.txt",
+  header=FALSE, stringsAsFactors=FALSE)
+bound_genes$V1 <- gsub("ID=", "", bound_genes$V1)
+```
+```{r}
+# Get your significant DEG names
+sig_gene_names <- rownames(sig)
+
+# Find overlap
+overlap <- intersect(sig_gene_names, bound_genes$V1)
+cat("Number of genes bound AND differentially expressed:", 
+    length(overlap), "\n")
+
+# Save overlap list
+write.csv(data.frame(gene=overlap),
+  "bound_and_DE_genes.csv")
+```
+```{r}
+# PCA Plot - save as PNG
+png("PCA_plot.png", 
+    width=800, height=600)
+vsd <- vst(dds, blind=FALSE)
+plotPCA(vsd, intgroup="condition")
+dev.off()
+
+# MA Plot - save as PNG
+png("MA_plot.png",
+    width=800, height=600)
+plotMA(res, ylim=c(-5,5),
+       main="MA Plot - Mutant vs Normal")
+dev.off()
+```
+
